@@ -13,7 +13,7 @@ public class linearsearch{
             nums[i]=sc.nextInt();
              
         }
-        System.out.println("Enter target element");
+        System.out.println("Enter target element5");
         int target=sc.nextInt();
         int a= linear( nums, target);
         System.out.println("Element found at index "+a);
