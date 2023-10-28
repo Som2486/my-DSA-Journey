@@ -1,24 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
+
     public boolean isBalanced(TreeNode root) {
-        // If the tree is empty, we can say it’s balanced...
-        if (root == null)  return true;
-        // Height Function will return -1, when it’s an unbalanced tree...
-		if (Height(root) == -1)  return false;
-		return true;
-	}
-    // Create a function to return the “height” of a current subtree using recursion...
-	public int Height(TreeNode root) {
-        // Base case...
-		if (root == null)  return 0;
-        // Height of left subtree...
-		int leftHeight = Height(root.left);
-        // Height of height subtree...
-		int rightHight = Height(root.right);
-        // In case of left subtree or right subtree unbalanced, return -1...
-		if (leftHeight == -1 || rightHight == -1)  return -1;
-        // If their heights differ by more than ‘1’, return -1...
-        if (Math.abs(leftHeight - rightHight) > 1)  return -1;
-        // Otherwise, return the height of this subtree as max(leftHeight, rightHight) + 1...
-		return Math.max(leftHeight, rightHight) + 1;
+        // Call the dfsHeight function to get the height of the tree
+        // If the returned value is -1, the tree is not balanced
+        // Otherwise, it is balanced
+        return dfsHeight(root) != -1;
+    }
+
+    public static int dfsHeight(TreeNode root){
+
+        // Base case: If the root is null, the height is 0
+        if(root == null){
+            return 0;
+        }
+    
+        // Recursively get the height of the left subtree
+        int leftHeight = dfsHeight(root.left);
+
+        // If the left subtree is not balanced, return -1
+        if(leftHeight == -1){
+            return -1;
+        }
+    
+        // Recursively get the height of the right subtree
+        int rightHeight = dfsHeight(root.right);
+        
+        // If the right subtree is not balanced, return -1
+        if(rightHeight == -1){
+            return -1;
+        }
+    
+        // If the absolute difference between the left and right subtree heights
+        // is greater than 1, the tree is not balanced, so return -1
+        if(Math.abs(leftHeight - rightHeight) > 1){
+            return -1;
+        }
+    
+        // Otherwise, return the maximum height of the left and right subtrees, plus 1
+        // This represents the height of the current node
+    return Math.max(leftHeight,rightHeight)+1;
     }
 }
