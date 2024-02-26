@@ -1,0 +1,1 @@
+c(base64.b64decode({self.enc_txt})
